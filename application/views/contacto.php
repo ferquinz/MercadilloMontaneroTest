@@ -11,7 +11,7 @@
 			<div class="container">
 				<!--<h1>Serene</h1>-->
 			</div>
-		</section>
+		</section> 
 
 		<section class="module content">
 			<div class="container">

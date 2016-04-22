@@ -227,8 +227,6 @@ function loadMore()
 	
 	                   $("#ListadoProductos").append(html);
 	                   scrollLoad = true;
-	                   //$('#ListadoProductos').html(data);
-	                   //$(".before").show();
 	               }
 	               else
 	               {
