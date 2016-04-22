@@ -552,7 +552,30 @@ body.modal-open {
 
 
 
+	#content {
+		width: 100%;
+		overflow: hidden;
+	}
 
+	#imagencontacto img {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+	}
+
+	.formulario {
+		font-size: 1.7 rem;
+		line-height: 1.75em;
+	}
+
+	.main-content {
+		position: relative;
+	}
 
 /* ============================================================
   PRIMARY STRUCTURE

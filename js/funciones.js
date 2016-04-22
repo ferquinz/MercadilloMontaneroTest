@@ -3,19 +3,7 @@
  */
 
 $(document).ready(function() {
-	
-	/*$('div img').on('click', function() {
-	 var src = $(this).attr('src');
-	 var img = '<img src="' + src + '" class="img-responsive"/>';
-	 $('#myModal').modal();
-	 $('#myModal').on('shown.bs.modal', function() {
-	 $('#myModal .modal-body').html(img);
-	 });
-	 $('#myModal').on('hidden.bs.modal', function() {
-	 $('#myModal .modal-body').html('');
-	 });
-	 });*/
-	
+		
 	$("#emailform").submit(function () {
 
 		event.preventDefault();
@@ -50,7 +38,6 @@ $(document).ready(function() {
 });
 
 function filterProduct(value){
-	//console.log("listado/ajax_filter/" + value);
 	$.ajax({
 			url : "ajax_filter/" + value,
 			type : "POST",
@@ -66,33 +53,27 @@ function filterProduct(value){
 		});
 }
 
-//url : "<?php echo site_url('listado/ajax_delete')?>/" + id,
-
 $(document).on("click", "#remove", function () {
      var ProductId = $(this).data('id');
      $(".modal-body #productid").val(ProductId);
 });
 
 function deleteProduct(id) {
-	console.log(id);
-	//if (confirm('¿Seguro que deseas elimianr el producto?')) {
-		// ajax delete data to database
-		$.ajax({
-			url : "ajax_delete/" + id,
-			type : "POST",
-			success : function(data) {
-				//if success reload ajax table
-				$('#deleteModal').modal('hide');
-				$('input[name=filtro]').val('');
-				$('#ListadoProductos').html(data);				
-				showAlert("Producto eliminado", "success");
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				showAlert("Error al eliminar el producto: " + errorThrown, "danger");
-			}
-		});
-
-	//}
+	// ajax delete data to database
+	$.ajax({
+		url : "ajax_delete/" + id,
+		type : "POST",
+		success : function(data) {
+			//if success reload ajax table
+			$('#deleteModal').modal('hide');
+			$('input[name=filtro]').val('');
+			$('#ListadoProductos').html(data);				
+			showAlert("Producto eliminado", "success");
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			showAlert("Error al eliminar el producto: " + errorThrown, "danger");
+		}
+	});
 }
 
 function showAlert(message, type, closeDelay) {
@@ -136,8 +117,8 @@ function AbrirFicha(pagina, valor, visitas){
         preload: true,
         padding: 0,
         maxWidth: 1170,
-        maxHeight: 770,
-        height: 770,
+        maxHeight: 710,
+        height: 710,
         width: 1170,
         fitToView: true,
         autoSize: false,
