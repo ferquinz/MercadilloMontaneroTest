@@ -1,31 +1,3 @@
-<style>
-	#content {
-		width: 100%;
-		overflow: hidden;
-	}
-
-	#imagencontacto img {
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: auto;
-	}
-
-	.formulario {
-		font-size: 1.7 rem;
-		line-height: 1.75em;
-	}
-
-	.main-content {
-		position: relative;
-	}
-
-</style>
-
 <div id="main">
 	<div id="content">
 		<section class="module parallax parallax-1">
@@ -43,11 +15,11 @@
 
 		<section class="module content">
 			<div class="container">
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-md-12 normal-column">
 						<div class="blank-divider" style="height: 100px;"></div>
 					</div>
-				</div>
+				</div>-->
 				<h2>Envíanos tu sugerencia</h2>
 				<div class="row">
 					<div class="col-md-12 normal-column">
@@ -73,6 +45,16 @@
 							<div id="successMessage" class="success" style="display:none; color: green;" >Mensaje enviado correctamente</div>
 							<div id="errorMessage" class="error" style="display:none; color: red;" >Error al enviar el mensaje. Envíelo a la dirección: mercadillomontanero@gmail.com</div>
 							<div class="modal-footer">
+								<div style="float: left;">
+									<a style="float: left;" href="https://www.wetransfer.com/" target="_blank">
+										<span>
+											<i class="glyphicon glyphicon-transfer"></i> Enviar datos adjuntos
+										</span>
+									</a>
+									<div>
+										mercadillomontanero@gmail.com
+									</div>
+								</div>
 								<button type="submit" value="Enviar" class="btn btn-success">Enviar</button>
 							</div>
 						</form>
