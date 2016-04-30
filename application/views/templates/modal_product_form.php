@@ -1,3 +1,4 @@
+	
 <script>
 
 $(document).ready(function() {
@@ -19,7 +20,11 @@ $(document).ready(function() {
 		data = new FormData(),
 		params   = $form.serializeArray(),
 		files    = $form.find('[name="imagenes"]')[0].files;
-		
+	
+		data.append("ciudad", addCity != "undefined"? addCity : "");
+		data.append("provincia", addProvince != "undefined"? addProvince : "");
+		data.append("pais", addCountry != "undefined"? addCountry : "");
+				
 		$.each(files, function (key, file){
 			console.log("imagenes-" + key);
 			data.append("imagenes-" + key, file);
@@ -28,7 +33,7 @@ $(document).ready(function() {
 		$.each(params, function(i, val) {
 			data.append(val.name, val.value);
 		});
-	
+		
 		// ajax adding data to database
 		$.ajax({
 			url : "<?php echo site_url('listado/ajax_add')?>",
@@ -40,16 +45,16 @@ $(document).ready(function() {
 			contentType: false,
 			success: function(data)
 			{
-			//if success close modal and reload ajax table
-			$('#myModalForm').modal('hide');
-			//$('#ListadoProductos').html(data);
-			showAlert("Producto agregado", "success");
-			window.location.reload();
+				//if success close modal and reload ajax table
+				$('#myModalForm').modal('hide');
+				//$('#ListadoProductos').html(data);
+				showAlert("Producto agregado", "success");
+				window.location.reload();
 			},
 			error: function (jqXHR, textStatus, errorThrown)
 			{
-			$('#myModalForm').modal('hide');
-			showAlert("Error al añadir el producto: " + errorThrown, "danger");
+				$('#myModalForm').modal('hide');
+				showAlert("Error al añadir el producto: " + errorThrown, "danger");
 			}
 		});
 	});
@@ -147,7 +152,7 @@ MODAL PARA FORMULARIO
 						<div class="col-md-6">
 							<div class="form-group" >
 								<label for="recipient-place" class="control-label">Lugar:</label>
-								<input type="text" class="form-control" id="txtplace" placeholder="lugar" name="place" required />
+								<input type="text" class="form-control controls" id="txtplace" placeholder="lugar" name="place" required />
 							</div>
 						</div>
 					</div>
@@ -210,3 +215,50 @@ MODAL PARA FORMULARIO
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script>
+	var addCity, addProvince, addCountry;
+	
+	function initAutocomplete() {
+		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtplace'));
+		autocomplete.addListener('place_changed', function() {
+		    var place = autocomplete.getPlace();
+		    console.log(place);
+		    if (!place.geometry) {
+		      window.alert("Autocomplete's returned place contains no geometry");
+		      return;
+		    }
+
+			var componentForm = {
+			  street_number: 'short_name',
+			  route: 'long_name',
+			  locality: 'long_name',
+			  administrative_area_level_1: 'long_name',
+			  country: 'long_name',
+			  postal_code: 'short_name'
+			};
+			
+			for (var i = 0; i < place.address_components.length; i++) {
+
+			    var addressType = place.address_components[i].types[0];
+				//console.log(addressType);
+			    if (componentForm[addressType]) {
+			
+			        var val = place.address_components[i][componentForm[addressType]];
+			
+			        if(addressType == 'locality')                    addCity = val;
+			        if(addressType == 'administrative_area_level_1') addProvince = val;
+			        if(addressType == 'country')                     addCountry = val;
+			    }
+			
+			}
+			
+			console.log("Ciudad: " + addCity);
+			console.log("Provincia: " + addProvince);
+			console.log("Pais: " + addCountry);
+				     
+    	});
+	}
+	
+</script>
+ 	
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete" async defer></script>
