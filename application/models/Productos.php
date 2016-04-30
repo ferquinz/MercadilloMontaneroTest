@@ -3,6 +3,7 @@ class Productos extends CI_Model {
 
 	var $table = 'productos';
 	var $table_imagenes = 'productos_imagenes';
+	var $table_places = 'lugares';
 	
 	public function __construct() {
 		$this -> load -> database();
@@ -97,6 +98,11 @@ class Productos extends CI_Model {
 	public function save_img($data)
 	{
 		$this->db->insert($this->table_imagenes, $data);
+	}
+	
+	public function save_places($data)
+	{		
+		$this->db->insert($this->table_places, $data);
 	}
 	
 	public function delete_by_id($id)

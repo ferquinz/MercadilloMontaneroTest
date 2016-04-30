@@ -244,7 +244,3 @@ function loadMore()
 	    }
 	}
 	
-	
-
-
-
