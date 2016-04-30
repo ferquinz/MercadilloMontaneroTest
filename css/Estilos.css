@@ -668,3 +668,7 @@ section.module.parallax-3 {
     font-size: 160px;
   }
 }
+/* Put in front of the page the data */
+.pac-container {
+    z-index: 1051 !important;
+}
