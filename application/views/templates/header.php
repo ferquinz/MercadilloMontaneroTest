@@ -10,18 +10,18 @@
 	<title>Mercadillo Montañero</title>
 	<link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
 
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/fontello/fontello.css"  media="screen" />
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/hover/hover.css" media="screen" />
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/Estilos.css" media="screen" />
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/lightbox/lightbox.css" media="screen" />
-	<link rel="stylesheet"  href="<?php echo base_url() ?>js/fancybox/jquery.fancybox.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/fontello/fontello.css"  media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/hover/hover.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/Estilos.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/lightbox/lightbox.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>js/fancybox/jquery.fancybox.css" media="screen" />
 	<!-- Bootstrap -->
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/bootstrap/bootstrap.min.css" media="screen" />
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/bootstrap/bootstrap-combobox.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap/bootstrap.min.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap/bootstrap-combobox.css" media="screen" />
 	<!-- Animation -->
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/animate.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/animate.css" media="screen" />
 	<!-- Bootstrap Dialog -->
-	<link rel="stylesheet"  href="<?php echo base_url() ?>css/bootstrap/bootstrap-dialog.min.css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap/bootstrap-dialog.min.css" media="screen" />
 	<!--<link rel="stylesheet"  href="<?php echo base_url() ?>js/scroll/jquery.mCustomScrollbar.min.css" media="screen" />-->
 	<link href="<?php echo base_url() ?>css/fileinput/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Amaranth:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -34,10 +34,13 @@
 	<script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap/bootstrap-combobox.js"></script>
 	<script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap/bootstrap-dialog.min.js"></script>
+	
+	<!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places" async defer></script>-->
 	<script type="text/javascript" src="<?php echo base_url() ?>js/funciones.js"></script>
 	
 	<!--<script type="text/javascript" src="<?php echo base_url() ?>js/scroll/jquery.mCustomScrollbar.js"></script>-->
 	<script type="text/javascript" src="<?php echo base_url() ?>js/elevatezoom/jquery.elevatezoom.js"></script>
+	
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
