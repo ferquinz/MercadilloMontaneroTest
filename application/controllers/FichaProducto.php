@@ -26,8 +26,7 @@ class FichaProducto extends CI_Controller {
 		$this -> load -> view("templates/header");
 		$this -> load -> view("fichaproducto", $data); 
 		$this -> load -> view('templates/fin');
-	}
-		
+	}	
 }
 
 ?>
