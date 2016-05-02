@@ -31,11 +31,8 @@ class Listado extends CI_Controller {
 					$this -> session -> set_userdata(array('tipolistado' => $data["tipolistado"], 'pagina' => $data["pagina"]));
 					$data['products'] = $this -> product -> get_products($data["tipolistado"], $param);
 				} else if ($param <> '') {
-					//$filter = explode("_", $param);
 					$data["tipolistado"] = $this -> session -> userdata('tipolistado');
-					//$filter[1];
 					$data["pagina"] = $this -> session -> userdata('pagina');
-					//$this->product->get_category_name($data["tipolistado"]);
 					$data["products"] = $this -> product -> get_products($this -> session -> userdata('tipolistado'), $param);
 		
 				} else {
@@ -71,6 +68,12 @@ class Listado extends CI_Controller {
 		$this -> session -> set_userdata(array('tipolistado' => $data["tipolistado"], 'pagina' => $data["pagina"]));		
 	}
 
+	public function ajax_get_data() {
+		$id = $this -> input -> post('productid');
+		$datos = $this->product->get_product_data($id);	
+		echo json_encode(array("status" => "success", "datos" => $datos));
+	}
+	
 	public function ajax_add() {
 		$value = $this -> input -> post('facebook');
 		$chek = 0;
@@ -124,7 +127,7 @@ class Listado extends CI_Controller {
 	}
 
 	public function do_resize($path, $path_thumb, $filename) {
-		$this -> load -> library('image_lib');
+		//$this -> load -> library('image_lib');
 		$source_path = './' . $path . '/' . $filename;
 		$target_path = './' . $path_thumb;
 		$config_manip = array(
@@ -153,7 +156,6 @@ class Listado extends CI_Controller {
 		$result = $this -> product -> getpass($id);
 		$status = 0;
 		if ($result) {
-			//$datos = strcmp(md5($this->input->post('productpass')), $result);
 			if (strcmp(md5($this -> input -> post('productpass')), $result) == 0) {
 				$dir = "./img/images/" . $id;
 				$path = $this -> config -> base_url() . "img/images/" . $id;
@@ -161,15 +163,12 @@ class Listado extends CI_Controller {
 				// load the helper
 				delete_files($dir, true);
 				rmdir($dir);
-				//$error = $this->deleteDirectory($dir);
 				$this -> product -> delete_by_id($id);
 
 				$status = 1;
 
 				$data["tipolistado"] = $this -> session -> userdata('tipolistado');
-				//$filter[1];
 				$data["pagina"] = $this -> session -> userdata('pagina');
-				//$this->product->get_category_name($data["tipolistado"]);
 				$data["products"] = $this -> product -> get_products($this -> session -> userdata('tipolistado'), '');
 				$datos = $this -> load -> view("listado", $data, TRUE);
 			} else {
@@ -201,9 +200,7 @@ class Listado extends CI_Controller {
 	public function ajax_filter($filtro = '') {
 
 		$data["tipolistado"] = $this -> session -> userdata('tipolistado');
-		//$filter[1];
 		$data["pagina"] = $this -> session -> userdata('pagina');
-		//$this->product->get_category_name($data["tipolistado"]);
 		$this -> session -> set_userdata(array('tipolistado' => $data["tipolistado"], 'pagina' => $data["pagina"], 'filtro' => $filtro));
 		$data["products"] = $this -> product -> get_products($this -> session -> userdata('tipolistado'), $filtro);
 		$this -> load -> view("listado", $data);

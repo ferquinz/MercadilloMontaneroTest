@@ -127,10 +127,82 @@ function AbrirFicha(pagina, valor, visitas){
         openEffect: 'none',
         closeEffect: 'none',
         afterShow: function(){
-	   		//this.width = $('.fancybox-iframe').contents().find('html').width();
-	   		this.height = $('.fancybox-iframe').contents().find('html').height();
-	   		console.log("Altura = " + this.height);
+	   		/*this.height = $('.fancybox-iframe').contents().find('html').height();
+	   		console.log("Altura = " + this.height);*/
 	   		$("#cuadro_producto").css("height", (this.height - 40) + "px"); 
+	  	},
+	  	afterClose: function(){
+	  		$.ajax({
+	            type : "POST",
+	            url : "ajax_get_data",
+	            data : "productid=" + valor,//la última id
+	            success : function(data) 
+	            {
+	            	var html = "";
+	            	var json = JSON.parse(data);
+	            	console.log(json);
+	            	html += '<div class="thumbnail_ext" >';
+					html += '	<div id="div_img_box_' + json.datos[0].id + '" >';
+							var files = "";
+							if(json.datos[0].files != null){
+								files = json.datos[0].files.split(",");
+							}
+							var idimagen = 1;
+							for(img in files)
+               				{
+               					if(idimagen == 1){
+               						html += '<a id="img-' + json.datos[0].id + '-' + idimagen + '" class="img_box thumbnail" href="' + files[img] + '" data-lightbox="image-' + json.datos[0].id + '" data-title="' + json.datos[0].title + '" > ';
+									html += '	<div class="hovereffect">';
+									html += '		<img class="img-responsive first" alt="" src="' + files[img].replace("/basic/", "/thumb/") + '" ></img>';
+									html += '		<div class="overlay">';
+									html += '			<h2>Precio</h2>';
+									html += '			<p>';
+									html += '				' + json.datos[0].price + ' €';
+									html += '			</p>';
+									html += '		</div>';
+									html += '	</div>	';
+									html += '</a>               ';    						
+               					}
+               					else{
+               						html += '<a id="img-' + json.datos[0].id + '-' + idimagen + '" class="img_box thumbnail" href="' + files[img] + '" data-lightbox="image-' + json.datos[0].id + '"'; 
+									html += '	data-title="' + json.datos[0].title + '" style="display: none; width: 100%"> ';
+									html += '	<img class="img-responsive" alt="" src="' + files[img].replace("/basic/", "/thumb/") + '" ></img>';
+									html += '</a>    ';               						
+               					}
+               					idimagen += 1;	
+               				}
+
+						html += '</div>';
+						html += '<div id="descripcion_box_' + json.datos[0].id + '" class="caption" alt="div_img_box" >';
+						html += '	<h3 style="text-align: center;">' + json.datos[0].title + '</h3>';
+	        			html += '	<p class="cortar" style="text-align: center;">';
+	        			html += '		<label id="lblLugar">Lugar: </label>';
+						html += '		<span for="Lugar">' + json.datos[0].place + '</span>';
+						html += '	</p>';
+						html += '	<p class="cortar" style="text-align: center;">';
+	        			html += '		<label id="lblContacto">Contacto: </label>';
+	        			if(json.datos[0].fbchecked == 0){
+	        				html += '			<span for="Contacto">' + json.datos[0].contact + '</span>';
+	        			}
+	        			else{
+	        				html += '			<span for="Contacto">' + json.datos[0].fbname + '</span>';
+	        			}	
+						html += '	</p>';
+						html += '	<button id="remove" class="btn btn-danger icon-ok hidden-xs" data-id="' + json.datos[0].id + '" data-toggle="modal" data-target="#deleteModal" alt="button" data-toggle="tooltip" data-placement="bottom" title="Solo para propietarios">Vendido</button>';
+						html += '	<span style="margin-left: 10%;" class="hidden-xs">';
+						html += '		<i style="color: #5bc0de; background-color: white; padding-right: 5px " class="glyphicon btn-info glyphicon-eye-open "></i>';
+						html += '		<b>' + json.datos[0].visitas + '</b>';
+						html += '	</span> ';
+						var url = "'" + window.location.origin + "/FichaProducto'";
+						html += '	<button class="btn btn-warning" id="btnLeer" onclick="AbrirFicha(' + url + ', ' + json.datos[0].id + ', ' + json.datos[0].visitas + ')" style="float: right;" >Leer Mas<i class="icon-forward"></i></button>';
+						html += '</div>';
+						html += '</div>';
+						
+						var div = document.getElementById('product-' + valor);
+
+						div.innerHTML = html;
+	            }
+         	});
 	  	},
         helpers: {
             overlay: { 

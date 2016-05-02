@@ -240,7 +240,6 @@ MODAL PARA FORMULARIO
 			for (var i = 0; i < place.address_components.length; i++) {
 
 			    var addressType = place.address_components[i].types[0];
-				//console.log(addressType);
 			    if (componentForm[addressType]) {
 			
 			        var val = place.address_components[i][componentForm[addressType]];
@@ -248,14 +247,8 @@ MODAL PARA FORMULARIO
 			        if(addressType == 'locality')                    addCity = val;
 			        if(addressType == 'administrative_area_level_1') addProvince = val;
 			        if(addressType == 'country')                     addCountry = val;
-			    }
-			
-			}
-			
-			console.log("Ciudad: " + addCity);
-			console.log("Provincia: " + addProvince);
-			console.log("Pais: " + addCountry);
-				     
+			    }	
+			}	     
     	});
 	}
 	
