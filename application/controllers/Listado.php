@@ -157,8 +157,9 @@ class Listado extends CI_Controller {
 		$status = 0;
 		if ($result) {
 			if (strcmp(md5($this -> input -> post('productpass')), $result) == 0) {
-				$dir = "./img/images/" . $id;
-				$path = $this -> config -> base_url() . "img/images/" . $id;
+				/* ELIMINAMOS SOLO LA CARPETA PRINCIPAL DEJANDO LOS THUMBS (BORRADO LOGICO)*/
+				$dir = "./img/images/" . $id . "/basic";
+				/*$path = $this -> config -> base_url() . "img/images/" . $id;*/
 				$this -> load -> helper("file");
 				// load the helper
 				delete_files($dir, true);

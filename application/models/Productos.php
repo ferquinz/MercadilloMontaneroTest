@@ -29,8 +29,7 @@ class Productos extends CI_Model {
 		return $query->result_array();
 		
 		/*if (!empty($filter)){
-			
-													
+										
 			$query = $this->db->query('SELECT A.id, A.title, A.place, A.price, A.contact, A.description, A.sold, A.stars, A.password, A.category,  GROUP_CONCAT(A.files) AS files FROM
 	                							(SELECT productos.Producto_id AS id, Titulo AS title, Lugar AS place, Precio AS price, Contacto AS contact, Descripcion AS description, Vendido AS sold, 
 	                								Estrellas AS stars, Contraseña AS password, Categoria_id AS category,  productos_imagenes.Imagen_url AS files
@@ -111,23 +110,14 @@ class Productos extends CI_Model {
 		$this->db->where('Producto_id', $id);
 		$this->db->update($this->table, $data);
 		
-        /*$this->db->where('Producto_id', $id);
-        $this->db->delete($this->table);*/
-		$this->db->where('Producto_id', $id);
-		$this->db->delete($this->table_imagenes);
+		// NO ELIMINAMOS DE LA CARPETA DE IMAGENES (BORRADO LOGICO)
+		/*$this->db->where('Producto_id', $id);
+		$this->db->delete($this->table_imagenes);*/
     }
 
 	public function getpass($productid)
 	{  
-	    //$this->db->where('Producto_id', $productid);
-	    //$query = $this->db->get($this->table);
 		$query = $this->db->get_where($this->table, array('Producto_id' => $productid));
-	    //$query = $this->db->query('SELECT Contraseña FROM productos WHERE Producto_id = '. $productid .'');
-	    /*if($query->num_rows > 0)
-	    {
-	        return $query->row();
-	    }
-	    return $query;*/
 		
 		$row = $query->row_array();
 
