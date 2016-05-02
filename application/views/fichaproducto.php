@@ -1,19 +1,3 @@
-<script>
-	
-	/*$(document).ready(function(){
-		
-		console.log("Altura cuerpo: " + $("#cuadro_producto").height());
-		console.log("Altura cabecera: " + $(".ficha_cabecera").height());	
-		console.log("Altura iframe: " + $(".fancybox-iframe").height());	
-		console.log("Altura iframe: " + $('#fancybox-content').contents().height());
-		console.log("Altura iframe: " + $("body").height());
-		console.log("Altura iframe: " + $('.fancybox-iframe').contents().find('html').height());
-		
-	});*/
-	
-</script>
-
-
 <body style="overflow: hidden">
 	<?php foreach ($product_data as $producto): ?>
 	<header class="ficha_cabecera">

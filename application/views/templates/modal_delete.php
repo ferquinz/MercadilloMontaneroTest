@@ -14,7 +14,6 @@
 				success: function(data)
 				{
 					if (data['status'] == 0){
-						console.log(data['datos']);
 						showAlert("Error al eliminar el producto: Las contraseñas no coinciden", "danger");
 					}
 					else{

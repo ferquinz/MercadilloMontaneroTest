@@ -23,13 +23,11 @@ $(document).ready(function() {
 			contentType: false,
 			success: function(data)
 			{
-				//console.log("Datos:" + data);
 				//if success close modal and reload ajax table
 				$('#successMessage').show();
 			},
 			error: function (jqXHR, textStatus, errorThrown, data)
 			{
-				//console.log("Datos:" + data);
 				$('#errorMessage').show();
 			}
 		});
@@ -127,8 +125,6 @@ function AbrirFicha(pagina, valor, visitas){
         openEffect: 'none',
         closeEffect: 'none',
         afterShow: function(){
-	   		/*this.height = $('.fancybox-iframe').contents().find('html').height();
-	   		console.log("Altura = " + this.height);*/
 	   		$("#cuadro_producto").css("height", (this.height - 40) + "px"); 
 	  	},
 	  	afterClose: function(){
@@ -140,7 +136,6 @@ function AbrirFicha(pagina, valor, visitas){
 	            {
 	            	var html = "";
 	            	var json = JSON.parse(data);
-	            	console.log(json);
 	            	html += '<div class="thumbnail_ext" >';
 					html += '	<div id="div_img_box_' + json.datos[0].id + '" >';
 							var files = "";

@@ -26,7 +26,6 @@ $(document).ready(function() {
 		data.append("pais", addCountry != "undefined"? addCountry : "");
 				
 		$.each(files, function (key, file){
-			console.log("imagenes-" + key);
 			data.append("imagenes-" + key, file);
 		});
 		
@@ -81,8 +80,6 @@ $(document).ready(function() {
 				document.getElementById("facebook").checked = true;
 				var accessToken = response.authResponse.accessToken;
 				FB.api('/me', function(response) {
-		  			console.log('Your name is ' + response.name);
-		  			console.log("Link: " + response.link);
 		  			$("#txtfbname").val(response.name);
 				});
 			} else if (response.status === 'not_authorized') {
@@ -222,7 +219,6 @@ MODAL PARA FORMULARIO
 		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtplace'));
 		autocomplete.addListener('place_changed', function() {
 		    var place = autocomplete.getPlace();
-		    console.log(place);
 		    if (!place.geometry) {
 		      window.alert("Autocomplete's returned place contains no geometry");
 		      return;
