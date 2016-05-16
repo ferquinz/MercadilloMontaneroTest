@@ -85,10 +85,11 @@
 		</section>
 
 		<section class="module parallax parallax-3">
-			<div id="map"></div>
-			<!--<div class="container">
-			<h1>Calm</h1>
-			</div>-->
+			<div id="map" class="map"></div>
+			<div id="popup" class="ol-popup">
+			  	<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+			  	<div id="popup-content"></div>
+			</div>
 		</section>
 
 		<!--<section class="module content">
@@ -101,67 +102,114 @@
 		</section>-->
 
 		<script>
-			var map;
-			function initMap() {
-				map = new google.maps.Map(document.getElementById('map'), {
-					center : {
-						lat : 40.485644,
-						lng : -3.707524
-					},
-					zoom : 15,
-					scrollwheel : false,
-					navigationControl : false,
-					mapTypeControl : false,
-					scaleControl : false,
-					draggable : false,
-					mapTypeId : google.maps.MapTypeId.ROADMAP
-				});
-				/* MURO */
-				var infowindow = new google.maps.InfoWindow({
-					content : "Muro"
-				});
-				marker = new google.maps.Marker({
-					map : map,
-					draggable : false,
-					animation : google.maps.Animation.DROP,
-					position : {
-						lat : 40.485245,
-						lng : -3.698660
-					}
-				});
-				marker.addListener('click', toggleBounce);
-				marker.addListener('click', function() {
-					infowindow.open(map, marker);
-				});
-				infowindow.open(map, marker);
-				/* TUNEL */
-				var infowindow1 = new google.maps.InfoWindow({
-					content : "Tunel"
-				});
-				marker1 = new google.maps.Marker({
-					map : map,
-					draggable : false,
-					animation : google.maps.Animation.DROP,
-					position : {
-						lat : 40.494624,
-						lng : -3.697573
-					}
-				});
-				marker1.addListener('click', toggleBounce);
-				marker1.addListener('click', function() {
-					infowindow1.open(map, marker1);
-				});
-				infowindow1.open(map, marker1);
-			}
+		
+			/**
+			 * Elements that make up the popup.
+			 */
+			var container = document.getElementById('popup');
+			var content = document.getElementById('popup-content');
+			var closer = document.getElementById('popup-closer');
+		
+			/**
+			 * Add a click handler to hide the popup.
+			 * @return {boolean} Don't follow the href.
+			 */
+			closer.onclick = function() {
+			  overlay.setPosition(undefined);
+			  closer.blur();
+			  return false;
+			};
+			
+			
+			/**
+			 * Create an overlay to anchor the popup to the map.
+			 */
+			var overlay = new ol.Overlay({
+			  element: container,
+			  autoPan: true,
+			  autoPanAnimation: {
+			    duration: 250
+			  }
+			});
+		
+			function createStyle(src, img) {
+		        return new ol.style.Style({
+		          image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+		            anchor: [0.5, 0.96],
+		            src: src,
+		            img: img,
+		            imgSize: img ? [img.width, img.height] : undefined
+		          }))
+		        });
+		      }
 
-			function toggleBounce() {
-				if (marker.getAnimation() !== null) {
-					marker.setAnimation(null);
-				} else {
-					marker.setAnimation(google.maps.Animation.BOUNCE);
-				}
-			}
+			var muro = new ol.Feature({
+        		geometry: new ol.geom.Point(ol.proj.transform([-3.698660,40.485245], 'EPSG:4326', 'EPSG:3857')),
+        		name: 'Muro',
+      		});
+			muro.set('style', createStyle('<?php echo base_url() ?>img/marker-icon.png', undefined));
+			
+      		var tunel = new ol.Feature({
+        		geometry: new ol.geom.Point(ol.proj.fromLonLat([-3.697573,40.494624])),
+        		name: 'Tunel',
+      		});
+      		tunel.set('style', createStyle('<?php echo base_url() ?>img/marker-icon.png', undefined));
+      		
+      		var iconStyle = new ol.style.Style({
+	        	image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+		          	anchor: [0.5, 0.96],
+		          	anchorXUnits: 'fraction',
+		          	anchorYUnits: 'pixels',
+		          	src: '<?php echo base_url() ?>img/marker-icon.png'
+		        }))
+	      	});
+			
+			var vectorSource = new ol.source.Vector({
+        		features: [muro, tunel]
+      		});
+
+      		var vectorLayer = new ol.layer.Vector({
+      			style: function(feature) {
+	              return feature.get('style');
+	            },
+        		source: vectorSource
+      		});
+      		
+			var map = new ol.Map({
+				interactions: ol.interaction.defaults({mouseWheelZoom:false}),
+			  	view: new ol.View({
+		    		center: ol.proj.transform([-3.707524, 40.485644], 'EPSG:4326', 'EPSG:3857'),
+				    zoom: 15,
+				    maxZoom: 18,
+				    minZoom: 6
+			  	}),
+			  	overlays: [overlay],
+			  	layers: [
+			    	new ol.layer.Tile({
+			      		source: new ol.source.MapQuest({layer: 'osm'})
+			    	}),
+			    	vectorLayer
+			  	],
+			  	target: 'map'
+			});
+			
+			/**
+			 * Add a click handler to the map to render the popup.
+			 */
+			map.on('singleclick', function(evt) {
+			  var name = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+			    return feature.get('name');
+			  })
+			  if(name != null){
+			  	var coordinate = evt.coordinate;
+			  	content.innerHTML = name;
+			  	overlay.setPosition(coordinate);
+			 }
+			});
+			map.on('pointermove', function(evt) {
+			  map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+			});
+			
 		</script>
-		<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 	</div>
 </div>

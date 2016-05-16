@@ -35,13 +35,15 @@
 	<script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap/bootstrap-combobox.js"></script>
 	<script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap/bootstrap-dialog.min.js"></script>
 	
-	<!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places" async defer></script>-->
 	<script type="text/javascript" src="<?php echo base_url() ?>js/funciones.js"></script>
 	
 	<!--<script type="text/javascript" src="<?php echo base_url() ?>js/scroll/jquery.mCustomScrollbar.js"></script>-->
 	<script type="text/javascript" src="<?php echo base_url() ?>js/elevatezoom/jquery.elevatezoom.js"></script>
 	
-	
+	<!-- Mapas -->
+	<link rel="stylesheet" href="<?php echo base_url() ?>css/openlayers/ol.css" type="text/css">
+    <script ype="text/javascript" src="<?php echo base_url() ?>js/openlayers/ol.js"></script>
+    
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
