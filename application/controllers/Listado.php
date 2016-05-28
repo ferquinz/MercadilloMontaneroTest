@@ -81,10 +81,18 @@ class Listado extends CI_Controller {
 			$chek = 1;
 		}
 		$data = array('Titulo' => $this -> input -> post('title'), 'Lugar' => $this -> input -> post('place'), 'Categoria_id' => $this -> input -> post('category'), 'Precio' => $this -> input -> post('price'), 'Contacto' => $this -> input -> post('contact'), 'Contraseña' => md5($this -> input -> post('pass')), 'Descripcion' => $this -> input -> post('description'), 'Vendido' => 0, 'Visitas' => 0, 'FBChecked' => $chek, 'FBName' => $this -> input -> post('txtfbname'));	
-		$insert = $this -> product -> save($data);
+		if($data){
+			$insert = $this -> product -> save($data);
+		}else {
+			return false;
+		}
 		
 		$data_places = array('Producto_id' => $insert, 'Ciudad' => $this -> input -> post('ciudad'), 'Provincia' => $this -> input -> post('provincia'), 'Pais' => $this -> input -> post('pais'));
-		$this->ajax_add_places($data_places);
+		if($data_places){
+			$this->ajax_add_places($data_places);
+		} else{
+			return false;
+		}
 
 		if (is_array($_FILES)) {
 			/*Crear carpeta que almacena las imagenes visor*/

@@ -70,7 +70,6 @@
 					$id = $news_products['id'];
 					endforeach; ?>
 			</div>
-			<!--<div class="before col-md-12 text-center"><img src='../img/lightbox/loading.gif' /></div>-->
 			<div class="before col-md-12 text-center"><img style="width: 64px; height: 64px;" src='../img/background/preload.gif' /></div>  
             <div class="lastId" style="display:none" id="<?php echo  $id ?>"></div>
 		</div>
