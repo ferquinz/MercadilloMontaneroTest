@@ -48,7 +48,7 @@ class Listado extends CI_Controller {
 		}
 
 		//$this -> load -> helper('url');
-		$this -> load -> view("templates/header");
+		$this -> load -> view("templates/header_chat");
 		$this -> load -> view("templates/menu", $data);
 		$this -> load -> view("templates/acciones_listado", $data);
 		$this -> load -> view("listado", $data);
@@ -80,8 +80,16 @@ class Listado extends CI_Controller {
 		if ($value == TRUE) {
 			$chek = 1;
 		}
+		if ( !isset($_POST['title']) || !isset($_POST['place']) || !isset($_POST['category']) || !isset($_POST['price']) || !isset($_POST['title']) || !isset($_POST['contact']) || !isset($_POST['pass']))
+		{
+		    $something = FALSE;
+		}
+		else
+		{
+		    $something = TRUE;
+		}
 		$data = array('Titulo' => $this -> input -> post('title'), 'Lugar' => $this -> input -> post('place'), 'Categoria_id' => $this -> input -> post('category'), 'Precio' => $this -> input -> post('price'), 'Contacto' => $this -> input -> post('contact'), 'Contraseña' => md5($this -> input -> post('pass')), 'Descripcion' => $this -> input -> post('description'), 'Vendido' => 0, 'Visitas' => 0, 'FBChecked' => $chek, 'FBName' => $this -> input -> post('txtfbname'));	
-		if($data){
+		if($something){
 			$insert = $this -> product -> save($data);
 		}else {
 			return false;

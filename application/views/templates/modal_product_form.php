@@ -10,10 +10,11 @@ $(document).ready(function() {
     $('#txtcontacto').on('change',function(){ // # is id based selector
        document.getElementById("facebook").checked = false;
     });
-
-
+    
 	$("#productform").submit(function () {
 	
+		$("#btnsell").attr('disabled', true);		
+		
 		event.preventDefault();
 		
 		var $form = $(event.target),
@@ -54,6 +55,7 @@ $(document).ready(function() {
 			{
 				$('#myModalForm').modal('hide');
 				showAlert("Error al añadir el producto: " + errorThrown, "danger");
+				$('#btnsell').removeAttr('disabled');
 			}
 		});
 	});
@@ -201,7 +203,7 @@ MODAL PARA FORMULARIO
 					<input type="text" id="txtfbname" name="txtfbname" class="hidden" />
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" >
+					<button id="btnsell" class="btn btn-success" type="submit">
 						Vender
 					</button>
 					<button class="btn btn-primary" aria-hidden="true" data-dismiss="modal" >
@@ -212,6 +214,9 @@ MODAL PARA FORMULARIO
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal_loading"><!-- Place at bottom of page --></div>
+
 <script>
 	var addCity, addProvince, addCountry;
 	

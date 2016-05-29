@@ -44,6 +44,7 @@
 	<link rel="stylesheet" href="<?php echo base_url() ?>css/openlayers/ol.css" type="text/css">
     <script ype="text/javascript" src="<?php echo base_url() ?>js/openlayers/ol.js"></script>
     
+    <script src="https://linked.chat/web/1349ra" async></script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
