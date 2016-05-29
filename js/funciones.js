@@ -12,6 +12,7 @@ $(document).ready(function() {
 		data = new FormData(),
 		params   = $form.serializeArray();
 	
+		console.log(params);
 		// ajax adding data to database
 		$.ajax({
 			url : "contacto/contactvalidate",
