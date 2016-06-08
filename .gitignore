@@ -8,6 +8,13 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+application/controllers/*
+!application/controllers/index.html
+!application/controllers/.htaccess
+
+img/
+video/
+
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
