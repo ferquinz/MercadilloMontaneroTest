@@ -12,8 +12,8 @@ application/controllers/*
 !application/controllers/index.html
 !application/controllers/.htaccess
 
-img/
-video/
+img/images/*
+video/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
