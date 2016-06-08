@@ -8,9 +8,9 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-application/controllers/*
-!application/controllers/index.html
-!application/controllers/.htaccess
+application/config/*
+!application/config/index.html
+!application/config/.htaccess
 
 img/images/*
 video/*
