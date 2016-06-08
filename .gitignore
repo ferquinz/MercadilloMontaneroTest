@@ -8,15 +8,13 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-<<<<<<< HEAD
 application/config/*
 !application/config/index.html
 !application/config/.htaccess
-=======
+
 application/controllers/*
 !application/controllers/index.html
 !application/controllers/.htaccess
->>>>>>> 1c9beba57209c9cc5b7ba5d0a8db9095dca40397
 
 img/images/*
 video/*
